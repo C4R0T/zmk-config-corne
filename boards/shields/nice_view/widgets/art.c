@@ -228,15 +228,12 @@ const lv_img_dsc_t mountain = {
     .data = mountain_map,
 };
 
-#define LV_ATTRIBUTE_MEM_ALIGN
+#ifndef LV_ATTRIBUTE_IMG_EVANGELION_DITHERLICIOUS
+#define LV_ATTRIBUTE_IMG_EVANGELION_DITHERLICIOUS
 #endif
 
-#ifndef LV_ATTRIBUTE_IMG_EVANGELION-DITHERLICIOUS
-#define LV_ATTRIBUTE_IMG_EVANGELION-DITHERLICIOUS
-#endif
-
-const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_EVANGELION-DITHERLICIOUS uint8_t
-    evangelion-ditherlicious_map[] = {
+const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_EVANGELION_DITHERLICIOUS uint8_t
+    evangelion_ditherlicious_map[] = {
 #if CONFIG_NICE_VIEW_WIDGET_INVERTED
         0xff, 0xff, 0xff, 0xff, /*Color of index 0*/
         0x00, 0x00, 0x00, 0xff, /*Color of index 1*/
@@ -315,12 +312,12 @@ const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_EVANGELIO
   0x00, 0x00, 0x00, 0x7f, 0xff, 0xdf, 0xfa, 0xa0, 0x3f, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xf0, 
 };
 
-const lv_img_dsc_t evangelion-ditherlicious = {
+const lv_img_dsc_t evangelion_ditherlicious = {
   .header.cf = LV_IMG_CF_INDEXED_1BIT,
   .header.always_zero = 0,
   .header.reserved = 0,
   .header.w = 140,
   .header.h = 68,
   .data_size = 1232,
-  .data = evangelion-ditherlicious_map,
+  .data = evangelion_ditherlicious_map,
 };
