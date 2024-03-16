@@ -119,6 +119,7 @@ int zmk_widget_status_init(struct zmk_widget_status *widget, lv_obj_t *parent) {
     lv_obj_align(top, LV_ALIGN_TOP_RIGHT, 0, 0);
     lv_canvas_set_buffer(top, widget->cbuf, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
 
+    lv_obj_t *art = lv_img_create(widget->obj);
     // Generate a random number between 0 and 3
     uint32_t random_number = sys_rand32_get();
     int random_index = random_number % 4;
