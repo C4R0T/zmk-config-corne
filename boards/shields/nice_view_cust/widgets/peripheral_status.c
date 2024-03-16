@@ -113,15 +113,16 @@ ZMK_DISPLAY_WIDGET_LISTENER(widget_peripheral_status, struct peripheral_status_s
 ZMK_SUBSCRIPTION(widget_peripheral_status, zmk_split_peripheral_status_changed);
 
 int zmk_widget_status_init(struct zmk_widget_status *widget, lv_obj_t *parent) {
-    srand(time(NULL));
     widget->obj = lv_obj_create(parent);
     lv_obj_set_size(widget->obj, 160, 68);
     lv_obj_t *top = lv_canvas_create(widget->obj);
     lv_obj_align(top, LV_ALIGN_TOP_RIGHT, 0, 0);
     lv_canvas_set_buffer(top, widget->cbuf, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
 
-    lv_obj_t *art = lv_img_create(widget->obj);
-    int random_index = rand() % 4;
+    // Generate a random number between 0 and 3
+    uint32_t random_number = sys_rand32_get();
+    int random_index = random_number % 4;
+
     lv_img_dsc_t *selected_image;
     switch (random_index) {
         case 0:
@@ -138,7 +139,7 @@ int zmk_widget_status_init(struct zmk_widget_status *widget, lv_obj_t *parent) {
             break;
         default:
             // Handle error or fallback option here
-            selected_image = &gengar; // Fallback to gengar in case of an error
+            selected_image = &rayquaza; // Fallback to rayquaza in case of an error
             break;
     }
     lv_img_set_src(art, selected_image);
