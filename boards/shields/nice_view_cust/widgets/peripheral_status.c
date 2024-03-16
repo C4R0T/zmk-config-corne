@@ -113,6 +113,7 @@ ZMK_DISPLAY_WIDGET_LISTENER(widget_peripheral_status, struct peripheral_status_s
 ZMK_SUBSCRIPTION(widget_peripheral_status, zmk_split_peripheral_status_changed);
 
 int zmk_widget_status_init(struct zmk_widget_status *widget, lv_obj_t *parent) {
+    srand(time(NULL));
     widget->obj = lv_obj_create(parent);
     lv_obj_set_size(widget->obj, 160, 68);
     lv_obj_t *top = lv_canvas_create(widget->obj);
@@ -120,8 +121,27 @@ int zmk_widget_status_init(struct zmk_widget_status *widget, lv_obj_t *parent) {
     lv_canvas_set_buffer(top, widget->cbuf, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
 
     lv_obj_t *art = lv_img_create(widget->obj);
-    bool random = sys_rand32_get() & 1;
-    lv_img_set_src(art, random ? &evangelion_ditherlicious : &gengar : &evangelion2 : &rayquaza);
+    int random_index = rand() % 4;
+    lv_img_dsc_t *selected_image;
+    switch (random_index) {
+        case 0:
+            selected_image = &gengar;
+            break;
+        case 1:
+            selected_image = &rayquaza;
+            break;
+        case 2:
+            selected_image = &evangelion2;
+            break;
+        case 3:
+            selected_image = &evangelion_ditherlicious;
+            break;
+        default:
+            // Handle error or fallback option here
+            selected_image = &gengar; // Fallback to gengar in case of an error
+            break;
+    }
+    lv_img_set_src(art, selected_image);
     lv_obj_align(art, LV_ALIGN_TOP_LEFT, 0, 0);
 
     sys_slist_append(&widgets, &widget->node);
